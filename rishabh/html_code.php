@@ -7,7 +7,38 @@
     <title>Add record</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-    
+    <script>
+    function validateImageSize() {
+        const fileInput = document.getElementById('userImage');
+        const file = fileInput.files[0];
+        const imageError = document.getElementById('imageError');
+        
+        if (file) {
+            const fileSizeInBytes = file.size; // Size in bytes
+            const minFileSize = 50 * 1024; // 50 KB in bytes
+            const maxFileSize = 100 * 1024; // 100 KB in bytes
+
+            console.log("File size: " + fileSizeInBytes + " bytes"); // Log file size for debugging
+
+            // Check if the file size is within the allowed range
+            if (fileSizeInBytes < minFileSize || fileSizeInBytes > maxFileSize) {
+                imageError.textContent = 'Image size must be between 50 KB and 100 KB.';
+                fileInput.value = ''; // Clear the file input
+            } else {
+                imageError.textContent = ''; // Clear any previous error message
+            }
+        } else {
+            imageError.textContent = ''; // Clear error if no file is selected
+        }
+    }
+
+    // Add an event listener to trigger validation when the user selects a file
+    document.getElementById('userImage').addEventListener('change', validateImageSize);
+</script>
+
+
+
+
     <script>
         
         $(document).ready(function() {
